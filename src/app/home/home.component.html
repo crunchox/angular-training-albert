@@ -1,0 +1,15 @@
+<button (click)='logout()' class="btn btn-link float-right">Logout</button>
+<h1>Hi, {{user.username}}</h1>
+<form>
+    <div class="form-group">
+        <label>Product Name</label>
+        <input type="text" class="form-control" name="productName" ngModel/>
+    </div>
+    <div class="form-group">
+        <label>Product Price (Rp.)</label>
+        <input type="number" class="form-control" name="productPrice" ngModel/>
+    </div>
+    <a class="btn btn-primary float-right">Add</a>
+</form>
+<br><br>
+<product-component *ngFor="let product of store.products" [data]="product"></product-component>
