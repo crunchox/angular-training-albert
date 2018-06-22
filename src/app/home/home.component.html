@@ -1,6 +1,7 @@
-<button (click)='logout()' class="btn btn-link float-right">Logout</button>
+<button (click)='logout()' class="btn btn-link float-right">Logout</button><br><br>
+<a routerLink="/cart/"><span class="fas fa-shopping-cart float-right"></span></a>
 <h1>Hi, {{user.username}}</h1>
-<form>
+<form #f="ngForm" (ngSubmit)="add(f)">
     <div class="form-group">
         <label>Product Name</label>
         <input type="text" class="form-control" name="productName" ngModel/>
@@ -9,7 +10,7 @@
         <label>Product Price (Rp.)</label>
         <input type="number" class="form-control" name="productPrice" ngModel/>
     </div>
-    <a class="btn btn-primary float-right">Add</a>
+    <button class="btn btn-primary float-right">Add</button>
 </form>
 <br><br>
 <product-component *ngFor="let product of store.products" [data]="product"></product-component>

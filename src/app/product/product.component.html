@@ -1,11 +1,43 @@
 <div class="card">
     <div class="card-body">
+        <form #f="ngForm">
+            <div class="form-group">
+                <input type="hidden" class="form-control" name="productID" [(ngModel)]="data.id" />
+                <input type="hidden" class="form-control" name="productName" [(ngModel)]="data.name" />
+                <input type="hidden" class="form-control" name="productPrice" [(ngModel)]="data.price[0].max" />
+            </div>
+        </form>
         <h5 class="card-title">{{data.name}}</h5>
-        <p class="card-text">Rp {{data.price[0].max}}</p>
-        <div class="card">
-            <a class="btn btn-warning">Edit</a>
-            <br>
-            <a class="btn btn-danger">Delete</a>
-        </div>
+        <p class="card-text">Rp. {{data.price[0].max}}</p>
+        <button class="btn btn-primary mb-2 mr-2" (click)="addCart(f)">Add to cart</button>
+        <button class="btn btn-warning mb-2 mr-2" (click)="openVerticallyCentered(content)">Edit</button>
+        <button class="btn btn-danger mb-2 mr-2" (click)="delete(f)">Delete</button>
     </div>
 </div>
+
+<ng-template #content let-c="close" let-d="dismiss">
+    <div class="modal-header">
+        <h4 class="modal-title">{{data.id}}
+            <br>{{data.name}}</h4>
+        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <form #f="ngForm">
+            <div class="form-group">
+                <label>Product Name</label>
+                <input type="hidden" class="form-control" name="productID" [(ngModel)]="data.id" />
+                <input type="text" class="form-control" name="productName" [(ngModel)]="data.name" />
+            </div>
+            <div class="form-group">
+                <label>Product Price (Rp.)</label>
+                <input type="number" class="form-control" name="productPrice" [(ngModel)]="data.price[0].max" />
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-light" (click)="c('Close click')">Close</button>
+        <button type="button" class="btn btn-primary" (click)="edit(f)">Save changes</button>
+    </div>
+</ng-template>
